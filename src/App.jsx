@@ -13,7 +13,7 @@ import amazon from './assets/amazon.webp'
 import Logo1 from "./assets/logo1.png"
 import Logo2 from './assets/logo2.png'
 import Logo3 from './assets/logo3.png'
-import vhiktonyImg from './assets/vhiktonyImg.webp'
+import vhiktonyImg from './assets/vhiktonyimg.webp'
 import moon from './assets/moon.svg'
 import sun from './assets/sun.svg'
 import css from './assets/css.svg'
