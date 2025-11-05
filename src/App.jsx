@@ -19,7 +19,7 @@ import sun from './assets/sun.svg'
 import css from './assets/css.svg'
 import git from './assets/git.svg'
 import html from './assets/html.svg'
-import Javascript from './assets/Javascript.svg'
+import javascript from './assets/javascript.svg'
 import react from './assets/react.svg'
 import tailwind from './assets/tailwind.svg'
 import pic from './assets/pic.webp'
@@ -51,7 +51,7 @@ function App() {
       css,
       git,
       html,
-      Javascript,
+      javascript,
       react,
       tailwind,
       pic,
