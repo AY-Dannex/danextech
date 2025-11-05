@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+.font-sora{
+  font-family: "Sora";
+}
+
+.theme{
+  transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
+}
+
+html, body{
+  /* background-color: #e3fffd; */
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.testimonialSwiper{
+  overflow: hidden  !important;
+}
