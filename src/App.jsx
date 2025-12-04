@@ -23,7 +23,8 @@ import javascript from './assets/javascript.svg'
 import react from './assets/react.svg'
 import tailwind from './assets/tailwind.svg'
 import pic from './assets/pic.webp'
-import portfolio from './assets/portfoliolight.webp'
+import portfolioLight from './assets/portfoliolight.webp'
+import portfolioDark from './assets/portfoliodark.webp'
 import sophia from './assets/sophia.webp'
 import michael from './assets/michael.webp'
 import chloe from './assets/chloe.webp'
@@ -32,7 +33,7 @@ import daniel from './assets/daniel.webp'
 
 function App() {
   const [imagesLoaded, setImagesLoaded] = useState(false)
-  const [progress, setProgress] = useState(0)
+  // const [progress, setProgress] = useState(0)
   const images = 
     [
       vhiktony,
@@ -55,7 +56,8 @@ function App() {
       react,
       tailwind,
       pic,
-      portfolio,
+      portfolioLight,
+      portfolioDark,
       sophia,
       daniel,
       chloe,
@@ -71,8 +73,6 @@ function App() {
 
       const handleLoad = () => {
         loadCount++
-        const percent = Math.floor((loadCount / images.length) * 100)
-        setProgress(percent)
         
         if (loadCount === images.length){
           setImagesLoaded(true)
@@ -80,13 +80,13 @@ function App() {
       }
 
       img.onload = handleLoad
-      img.onerror = handleLoad
+      // img.onerror = handleLoad
     })
   }, [])
 
   return (
     <>
-      {imagesLoaded ?  <Webpage /> : <Loader progress={progress} />}
+      {imagesLoaded ?  <Webpage /> : <Loader/>}
     </>
   )
 }

@@ -7,7 +7,7 @@ function Alerts({type, message, onClose}){
         const timer = setTimeout(() => {
             setVisible(false)
             setTimeout(() => onClose?.(), 300)
-        }, 3000)
+        }, 30000)
 
         return () => clearTimeout(timer)
     }, [onClose])

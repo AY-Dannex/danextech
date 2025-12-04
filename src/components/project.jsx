@@ -2,7 +2,8 @@ import ProjectCard from "./projectCard";
 import vhiktony from '../assets/vhiktony.webp'
 import moviemania from '../assets/moviemania.webp'
 import easybank from '../assets/easybank.webp'
-import portfolio from '../assets/portfoliolight.webp'
+import portfolioLight from '../assets/portfoliolight.webp'
+import portfolioDark from '../assets/portfoliodark.webp'
 import { Link } from 'react-router-dom'
 import Show from "./animation";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,7 +12,7 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 function Project(){
     const projects = [
         {
-            image: portfolio,
+            image: portfolioLight,
             name: "DanexTech Portfolio",
             tools: ["React", "Tailwind"]
         },

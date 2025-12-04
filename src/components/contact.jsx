@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faInstagram, faLinkedin, faMailchimp, faTiktok, faTwitter, faWhatsapp, faXTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faMailBulk, faVoicemail } from '@fortawesome/free-solid-svg-icons';
-import { faMailReply } from '@fortawesome/free-solid-svg-icons/faMailReply';
 import { useState } from 'react';
 import emailjs from '@emailjs/browser'
 import Footer from './footer';
 import Alerts from './alerts';
 import Show from './animation';
+import Logo3 from '../assets/logo3.png'
 
 function Contact (){
     const [formData, setFormData] = useState({
@@ -15,8 +15,8 @@ function Contact (){
         email: "",
         message: "",
     })
-    const [send, setSend] = useState(false)
     const [alert, setAlert] = useState({ show: false, type: "", message: "" });
+    const [load, setLoad] = useState(false)
 
     const handleCloseAlert = () => setAlert({ show: false, type: "", message: "" })
 
@@ -26,53 +26,76 @@ function Contact (){
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData)
 
-        if (formData.firstName.trim() !== "" && 
-            formData.lastName.trim() !== "" &&
-            formData.email.trim() !== "" &&
-            formData.message.trim() !== ""){
-                setSend(true)
-        }else(
-            // alert("Pls fill all field")
-            setAlert({ show: true, type: "error", message: "Please fill out all required fields." })
-        );
+        const { firstName, lastName, email, message } = formData;
 
-        if (send){
-            emailjs.send(
-                "service_bfo86tl",
-                "template_9ls6sxb",
-                {
-                    firstName: formData.firstName,
-                    lastName: formData.lastName,
-                    title: "Danextech Portfolio Contact Page",
-                    email: formData.email,
-                    message: formData.message,
-                },
-                "umQefFEFILMhFX5Jx"
-            )
-            .then(() => {
-                setAlert({ show: true, type: "success", message: "Message sent successfully!" });
-                setFormData({ firstName: "", lastName: "", email: "", message: "" });
-            })
-            .catch(() => {
-                setAlert({ show: true, type: "network", message: "Network error, please try again later." });
-            })
+        if (!firstName.trim() || !lastName.trim() || !email.trim() || !message.trim()) {
+            setAlert({
+                show: true,
+                type: "error",
+                message: "Please fill out all required fields."
+            });
+            return; 
         }
-            
-    }
+
+        setLoad(true);
+
+        emailjs.send(
+            "service_bfo86tl",
+            "template_9ls6sxb",
+            {
+                firstName,
+                lastName,
+                title: "Danextech Portfolio Contact Page",
+                email,
+                message,
+            },
+            "umQefFEFILMhFX5Jx"
+        )
+        .then(() => {
+            setAlert({
+                show: true,
+                type: "success",
+                message: "Message sent successfully!",
+            });
+
+            setFormData({
+                firstName: "",
+                lastName: "",
+                email: "",
+                message: ""
+            });
+        })
+        .catch(() => {
+            setAlert({
+                show: true,
+                type: "network",
+                message: "Network error, please try again later.",
+            });
+        })
+        .finally(() => {
+            setLoad(false);
+        });
+    };
+
 
     return(
         <div className='w-full bg-[#e3fffd] md:h-screen dark:bg-[#000]'>
             <div className="theme w-full bg-[#e3fffd] pt-30 dark:bg-[#000] md:h-fit">
-                <div className="theme relative z-20 max-w-[1440px] px-[20px] pb-10 mb-[480px] mx-auto bg-[#e3fffd] md:mb-0 dark:bg-[#000]">
-                    {/* <h1 className='theme text-[25px] font-bold text-center pb-10 dark:text-white'>Contact Me</h1> */}
+                {load && (
+                    <div className='fixed w-[100%] h-[100%] z-400 inset-0 bg-[#e3fffd]/80 dark:bg-[#000]/80'>
+                        <div className="min-h-screen w-full flex flex-col justify-center items-center">
+                            <img src={Logo3} alt="" className='w-[80px] animate-pulse'/>
+                        </div>
+                    </div>
+                )}
+                <div className="theme relative z-20 max-w-[1440px] px-[20px] pb-10 mb-[450px] mx-auto bg-[#e3fffd] md:mb-0 dark:bg-[#000]">
                     {alert.show && (
                         <div className='mb-4 absolute w-[90%] z-500 top-0 left-[50%] translate-x-[-50%]'>
                             <Alerts type={alert.type} message={alert.message} onClose={handleCloseAlert} />
                         </div>
                     )}
-                    <div className='theme w-full mx-auto flex flex-col-reverse justify-between gap-5 sm:w-[500px] md:flex-row-reverse gap-10 md:w-full bg-[#e3fffd] dark:bg-[#000]'>
+                    <div className='theme w-full mx-auto flex flex-col justify-between gap-25 sm:w-[500px] md:flex-row gap-10 md:w-full bg-[#e3fffd] dark:bg-[#000]'>
                             <div className="w-full  md:w-[450px]">
                         <Show type='slideLeft'>
                                 <h1 className='text-[30px] pb-10 text-center font-bold text-[#42c697]'>Contact Form</h1>
@@ -101,10 +124,7 @@ function Contact (){
                             </div>
                         <Show type='slideRight'>
                             <div className='max-w-[400px] mt-[-30px] md:mt-0'>
-                                <h1 className='text-[40px] text-[#42c697] font-bold'>Get in Touch</h1>
-                                <p className='theme text-[18px] font-bold dark:text-white'>I'd like to here from you!</p>
-                                <p className='theme py-[10px] dark:text-white'>If you have any inquries or just want to say hi, please use the contact form or you can send a direct message to my social media platforms:</p>
-                                <div className='flex flex-col gap-5'>
+                                <div className='flex flex-col gap-5 md:mt-20'>
                                     <div className='flex gap-2 items-center'>
                                         <p className='theme text-[20px] dark:text-white'>
                                             <FontAwesomeIcon icon={faEnvelope} />

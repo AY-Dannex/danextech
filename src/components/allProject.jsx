@@ -6,13 +6,14 @@ import weather from '../assets/weather.webp'
 import expense from '../assets/expense.webp'
 import blog from '../assets/blog.webp'
 import amazon from '../assets/amazon.webp'
-import portfolio from '../assets/portfoliolight.webp'
+import portfolioLight from '../assets/portfoliolight.webp'
+import portfolioDark from '../assets/portfoliodark.webp'
 import Footer from "./footer"
 
 function AllProject (){
      const projects = [
         {
-            image: portfolio,
+            image: portfolioLight,
             name: "DanexTech Portfolio",
             tools: ["React", "Tailwind"]
         },
